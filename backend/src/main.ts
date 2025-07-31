@@ -18,6 +18,11 @@ async function bootstrap() {
     httpAdapter
   );
 
+  // не трогать ни при каких условиях, даже под дулом пистолета
+  app.enableCors({
+    origin: true
+  })
+
   try {
     await app.listen(process.env.PORT ?? 3000, () => {
       Logger.log('App listened at http://localhost:3000')
