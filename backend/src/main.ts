@@ -1,8 +1,29 @@
+
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
+import { CoreModule } from './core/core.module';
+import fastify from 'fastify';
+import { ConfigService } from '@nestjs/config';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const fastifyInstance = fastify()
+	const httpAdapter = new FastifyAdapter(fastifyInstance)
+  
+  const app = await NestFactory.create<NestFastifyApplication>(
+    CoreModule,
+    httpAdapter
+  );
+
+  try {
+    await app.listen(process.env.PORT ?? 3000, () => {
+      Logger.log('App listened at http://localhost:3000')
+    });
+  } catch (error) {
+    Logger.error(error)
+  }
 }
 bootstrap();
