@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "Inter";
+    src: url("@/assets/fonts/Inter-VariableFont_opsz,wght.ttf"),
+    url("@/assets/fonts/Inter-Italic-VariableFont_opsz,wght.ttf");
+}
+
+@font-face {
+    font-family: "Old Standard TT";
+    src: url("@/assets/fonts/OldStandardTT-Regular.ttf"),
+    url("@/assets/fonts/OldStandardTT-Bold.ttf"),
+    url("@/assets/fonts/OldStandardTT-Italic.ttf");
+}
+
+body {
+    background: var(--color-bg-main);
+    font-family: var(--font-main), sans-serif;
+}
+
+@media screen and (min-width: 640px) {
+    body {
+        background: var(--bg-gradient) var(--color-bg-primary);
+    }
+}
+
+@theme {
+    --color-bg-main: #f2f1ed;
+    --color-primary: #393781;
+    --color-dark: #1e1e1e;
+
+    --color-govno: #f2f1ed;
+    --color-ton: #88b4ff;
+    --color-usdt: #88b4ff;
+    --color-gcrypto: #90ff90;
+
+    --color-tabs: #DEDEDF;
+    --color-tabs-active: #393781;
+
+    --color-bg-primary: #0F0F23;
+
+    --top-gradient: linear-gradient(90deg, #09092D 0%, #393781 100%);
+    --bg-gradient: linear-gradient(180deg, #0F0F23 58.65%, #393781 100%);
+
+    --color-input: #1E1E2E;
+    --color-placeholder: #ADAEBC;
+
+    --color-muted: #9EA1A1;
+    --color-gray-muted: #4B5563;
+    --color-muted-border: #E5E7EB;
+
+    --color-light-dark: #404040;
+
+    --font-main: "Inter", sans-serif;
+    --font-old-standard: "Old Standard TT", serif;
+}
+@supports (-webkit-touch-callout: none) {
+    .container {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Если нужно задать Inter везде, независимо от reset, можешь добавить: */
+* {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    touch-action: manipulation;
+    overscroll-behavior: none;
+    user-select: none;
+}
+/* Базовые отступы для всех платформ */
+.tg-safe-area {
+    padding: var(--tg-padding-top) var(--tg-padding-sides)
+    var(--tg-padding-bottom) var(--tg-padding-sides);
+
+    /* Фикс для мобильного viewport */
+    min-height: 100dvh;
+    box-sizing: border-box;
+}
+/* iOS */
+/* .is-tg-ios .tg-safe-area {
+   --tg-padding-top: max(
+      var(--ios-top-safe-area),
+      env(safe-area-inset-top, var(--ios-top-safe-area))
+   );
+
+   --tg-padding-bottom: max(
+      var(--ios-bottom-safe-area),
+      env(safe-area-inset-bottom, var(--ios-bottom-safe-area))
+   );
+} */
+
+/* Android */
+/* .is-tg-android .tg-safe-area {
+   --tg-padding-bottom: max(
+      var(--tg-padding-bottom),
+      env(safe-area-inset-bottom, var(--tg-padding-bottom))
+   );
+} */
+/* Горизонтальная ориентация */
+@media (orientation: landscape) {
+    .is-tg-ios .tg-safe-area {
+        --tg-padding-top: max(24px, env(safe-area-inset-top, 24px));
+    }
+}
+
+/* Планшеты */
+@media (min-width: 768px) {
+    .tg-safe-area {
+        --tg-padding-sides: 24px;
+    }
+}
+/* Фикс для клавиатуры на iOS */
+.is-tg-ios input,
+.is-tg-ios textarea {
+    transform: translateZ(0);
+    background-attachment: local !important;
+}
+/* Класс для нижних элементов (над клавиатурой) */
+.tg-bottom-fixed {
+    margin-bottom: env(safe-area-inset-bottom, 0);
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+}
+
+/* Фикс для position: fixed элементов */
+.tg-fixed-element {
+    padding-top: env(safe-area-inset-top, 0);
+}
+html{
+    min-height: 100dvh;
+    /* margin-bottom: 10px; */
+    overflow-y: auto;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #171918;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch; /* Для iOS */
+    min-height: 100vh;
+}

@@ -1,0 +1,14 @@
+dist/
+node_modules/
+.next/
+
+.env
+
+.vscode/
+.scripts/
+
+logs/
+*.log
+
+Dockerfile.debug
+docker-compose.debug.yml
