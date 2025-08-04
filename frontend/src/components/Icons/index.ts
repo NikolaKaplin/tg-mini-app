@@ -8,3 +8,7 @@ export { default as UserIcon } from "./UserIcon.vue";
 export { default as UploadIcon } from "./UploadIcon.vue";
 export { default as ArrowIcon } from "./ArrowIcon.vue";
 export { default as CrownIcon } from "./CrownIcon.vue";
+export { default as MinusIcon } from "./MinusIcon.vue";
+export { default as Wallet2Icon } from './Wallet2Icon.vue';
+export { default as TrashIcon } from './TrashIcon.vue'
+export { default as PhotoIcon } from "./PhotoIcon.vue"

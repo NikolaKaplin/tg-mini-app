@@ -14,6 +14,7 @@ import { publicUrl } from './helperts/publicUrl'
 // Mock the environment in case, we are outside Telegram.
 import './mockEnv'
 import { createPinia } from 'pinia'
+import { VueQueryPlugin } from '@tanstack/vue-query'
 import GovnoLogger from './lib/logger'
 
 // Configure all application dependencies.
@@ -26,5 +27,8 @@ app.config.errorHandler = errorHandler
 app.use(router)
 app.use(TonConnectUIPlugin, { manifestUrl: publicUrl('tonconnect-manifest.json') })
 app.use(pinia)
+app.use(VueQueryPlugin, {
+    enableDevtoolsV6Plugin: true
+})
 app.use(GovnoLogger)
 app.mount('#app')

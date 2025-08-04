@@ -17,14 +17,14 @@ const { initDataRaw } = retrieveLaunchParams();
 export const useAuthStore = defineStore('authStore', () => {
     const isValidate = ref(false)
     const token = ref<string | null>(null)
-    const userNameLocale = ref<string | null>(null)
+    const user = ref<User | null>(null)
 
     const HttpStatusCode = axios.HttpStatusCode;
     const SERVER_URL = import.meta.env.VITE_API_URL;
 
-    function setUserName(userName: string) {
-        userNameLocale.value = userName
-        localStorage.setItem('userName', userName);
+    function setUser(userData: User) {
+        user.value = userData;
+        localStorage.setItem('user', JSON.stringify(userData))
     }
 
     function setToken(newToken: string) {
@@ -73,10 +73,11 @@ export const useAuthStore = defineStore('authStore', () => {
                 const response = await axios.request<AuthResponse>(config)
                 if (response.status == HttpStatusCode.Ok && response.data.user.id != 0) {
                     setToken(response.data.token);
-                    setUserName(response.data.user.user_name_locale);
+                    setUser(response.data.user);
                     token.value = response.data.token
+                    GovnoLogger.info("Успех")
                 } else if (response.status == HttpStatusCode.Unauthorized) {
-                    router.replace({ name: 'Register' });
+                    await router.replace({ name: 'register' });
                 }
             } catch (error) {
                 GovnoLogger.error("Validate error: " + error)
@@ -87,5 +88,5 @@ export const useAuthStore = defineStore('authStore', () => {
     }
 
 
-    return { validate, register, isValidate, userNameLocale, token }
+    return { validate, register, isValidate, user, token }
 })

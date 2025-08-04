@@ -7,31 +7,29 @@ import TonConnectPage from '@/pages/TonConnectPage.vue';
 import IconTonConnect from '@/components/IconTonConnect.vue';
 import RegisterPage from '@/pages/auth/RegisterPage.vue';
 import BasicLayout from '@/layouts/BasicLayout.vue';
-import LicenseAgreement from '@/pages/auth/LicenseAgreement.vue';
 import HomePage from '@/pages/HomePage.vue';
+import ProfilePage from '@/pages/ProfilePage.vue';
+import WalletPage from '@/pages/WalletPage.vue';
+import PostPage from '@/pages/post/PostPage.vue';
+import AddPostPage from '@/pages/post/AddPostPage.vue';
 
 
-export const routes = [
+export const routes: RouteRecordRaw[] = [
   {
     path: '/register',
-    name: 'Register',
+    name: 'register',
     component: RegisterPage
   },
   {
-    path: "/license",
-    name: "license",
-    component: LicenseAgreement
+    path: "/error",
+    name: 'error',
+    component: () => import("@/pages/ErrorPage.vue")
   },
   {
     path: '/',
     name: 'baseLayout',
     component: BasicLayout,
     children: [
-      {
-        path: '',
-        name: 'home', // Добавляем имя для главной
-        component: HomePage
-      },
       {
         path: '/init-data',
         name: 'init-data',
@@ -65,6 +63,31 @@ export const routes = [
           icon: IconTonConnect,
           title: 'TON Connect',
         },
+      },
+      {
+        path: '/wallet',
+        name: "wallet",
+        component: () => import("@/pages/WalletPage.vue")
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        component: () => import("@/pages/ProfilePage.vue"),
+      },
+      {
+        path: '/profile/:id',
+        name: "profileOther",
+        component: () => import("@/pages/ProfilePage.vue")
+      },
+      {
+        path: "/posts",
+        name: 'posts',
+        component: () => import("@/pages/post/PostPage.vue"),
+      },
+      {
+        path: '/posts/add',
+        name: 'add-post',
+        component: () => import("@/pages/post/AddPostPage.vue")
       }
     ]
   },

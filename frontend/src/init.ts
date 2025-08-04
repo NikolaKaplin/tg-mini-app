@@ -24,6 +24,7 @@ export function init(debug: boolean): void {
         import('eruda')
             .then((lib) => lib.default.init())
             .catch(console.error);
+
     }
 
     // Check if all required components are supported.
