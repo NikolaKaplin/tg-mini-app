@@ -9,9 +9,9 @@ export const useViewportStore = defineStore('viewportStore', () => {
     const isKeyboardOpen = ref<boolean>(false)
 
     function init() {
+        if (isInitialized.value) return
         isInitialized.value = true
 
-        console.log("Swipe status: " + swipeBehavior.enableVertical())
         viewport.value = viewportState()
 
         on('viewport_changed', updateViewport);

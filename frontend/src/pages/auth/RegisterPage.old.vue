@@ -36,6 +36,7 @@ function submitNickname() {
 
 async function acceptAgreement() {
   if (!isAgreed.value || !formData.value.nickname) return;
+
   isLoading.value = true;
   try {
     await register(formData.value.nickname);
@@ -50,25 +51,8 @@ async function acceptAgreement() {
 
 <template>
   <main
-    class="flex min-h-screen w-full items-center justify-center p-4"
+    class="flex min-h-screen w-full items-center justify-center bg-gradient-to-br p-4"
   >
-
-  <div class="absolute top-45 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full bg-[#38367F] shadow-lg">
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="32" 
-          height="32" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="white" 
-          stroke-width="2" 
-          stroke-linecap="round" 
-          stroke-linejoin="round"
-        >
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </div>
     <div class="w-full max-w-md space-y-6">
       <!-- Шаг 1: Ввод никнейма -->
       <div v-if="currentStep === 'nickname'" class="space-y-6">
@@ -97,7 +81,7 @@ async function acceptAgreement() {
 
           <Button
             type="submit"
-            class="w-full bg-[#38367F] bg-[#38367F] text-white font-medium"
+            class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium"
           >
             Продолжить
           </Button>
@@ -148,7 +132,7 @@ async function acceptAgreement() {
           </div>
 
           <div
-            class="rounded-lg border border-purple-500/30 bg-purple-1000/20 p-6"
+            class="rounded-lg border border-purple-500/30 bg-purple-900/20 p-6"
           >
             <div class="space-y-4">
               <h2 class="text-lg font-semibold text-purple-300">
@@ -176,18 +160,15 @@ async function acceptAgreement() {
           <div class="flex gap-3">
             <Button
               variant="outline"
-              class="flex-1 border-none bg-[#38367F] "
-              @click="() => {
-                currentStep = 'nickname'
-                if (isAgreed) isAgreed = !isAgreed
-              }"
+              class="flex-1 border-purple-400 bg-purple-900/50 hover:text-white"
+              @click="currentStep = 'nickname'"
             >
               Назад
             </Button>
             <Button
               @click="acceptAgreement"
               :disabled="!isAgreed || isLoading"
-              class="flex-1 bg-[#38367F] hover:bg-purple-700 text-white font-medium"
+              class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-medium"
               :class="{
                 'cursor-not-allowed opacity-50': !isAgreed || isLoading,
               }"

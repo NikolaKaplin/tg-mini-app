@@ -1,74 +1,97 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
-import { HeartIcon, MessageCircleIcon, Share2Icon } from 'lucide-vue-next'
-import { formatDistanceToNow } from 'date-fns'
+import { Heart, MessageCircle, MoreHorizontal, Send } from 'lucide-vue-next'
+import { Badge } from '@/components/ui/badge'
 
-defineProps<{
-  post: any
-  type?: 'one' | 'multiple'
-}>()
+const post = {
+  id: 2,
+  content: "Thanks for sharing this information.",
+  author: {
+    id: 3,
+    username: "bobsmith",
+    avatar: "https://github.com/shadcn.png"
+  },
+  createdAt: "2023-10-15T16:30:00Z",
+  likes: 24,
+  comments: 5
+}
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
 </script>
 
 <template>
-  <Card>
-    <CardHeader class="flex flex-row items-center gap-4 pb-3">
-      <Avatar>
-        <AvatarImage :src="post.author.avatar" />
-        <AvatarFallback>{{ post.author.username.charAt(0).toUpperCase() }}</AvatarFallback>
-      </Avatar>
-      <div class="flex flex-col">
-        <span class="font-medium">{{ post.author.username }}</span>
-        <span class="text-sm text-gray-500">
-          {{ formatDistanceToNow(new Date(post.createdAt), { addSuffix: true }) }}
-        </span>
+  <div class="max-w-2xl w-full rounded-xl border bg-card text-card-foreground shadow-sm">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4">
+      <div class="flex items-center space-x-3">
+        <Avatar class="h-10 w-10">
+          <AvatarImage :src="post.author.avatar" />
+          <AvatarFallback>
+            {{ post.author.username.charAt(0).toUpperCase() }}
+          </AvatarFallback>
+        </Avatar>
+        <div>
+          <p class="font-medium">{{ post.author.username }}</p>
+          <p class="text-sm text-muted-foreground">
+            {{ formatDate(post.createdAt) }}
+          </p>
+        </div>
       </div>
-    </CardHeader>
+      <Button variant="ghost" size="icon" class="h-8 w-8">
+        <MoreHorizontal class="h-4 w-4" />
+      </Button>
+    </div>
 
-    <CardContent class="pb-3">
-      <h2 class="text-xl font-semibold mb-2">{{ post.title }}</h2>
-      <p class="text-gray-700 whitespace-pre-line">{{ post.content }}</p>
-    </CardContent>
+    <!-- Content -->
+    <div class="px-4 pb-3">
+      <p class="text-sm">{{ post.content }}</p>
+    </div>
 
-    <CardFooter class="flex justify-between border-t pt-3">
-      <div class="flex gap-4">
-        <Button variant="ghost" size="sm" class="gap-1 text-gray-600">
-          <HeartIcon class="w-4 h-4" />
+    <!-- Image placeholder (optional) -->
+    <!-- <div class="aspect-square w-full bg-muted"></div> -->
+
+    <!-- Actions -->
+    <div class="flex items-center justify-between px-4 py-2 border-t">
+      <div class="flex space-x-4">
+        <Button variant="ghost" size="sm" class="gap-1.5 text-muted-foreground">
+          <Heart class="h-4 w-4" />
           <span>{{ post.likes }}</span>
         </Button>
-        
-        <Button variant="ghost" size="sm" class="gap-1 text-gray-600">
-          <MessageCircleIcon class="w-4 h-4" />
-          <span>{{ post.comments.length }}</span>
+        <Button variant="ghost" size="sm" class="gap-1.5 text-muted-foreground">
+          <MessageCircle class="h-4 w-4" />
+          <span>{{ post.comments }}</span>
         </Button>
       </div>
       
-      <Button variant="ghost" size="sm" class="text-gray-600">
-        <Share2Icon class="w-4 h-4" />
+      <Button variant="ghost" size="sm" class="text-muted-foreground">
+        <Send class="h-4 w-4 mr-1.5" />
+        Share
       </Button>
-    </CardFooter>
-
-    <!-- Comments section -->
-    <div v-if="type === 'one'" class="border-t">
-      <div v-for="comment in post.comments" :key="comment.id" class="p-4 border-b last:border-b-0">
-        <div class="flex gap-3">
-          <Avatar class="h-8 w-8">
-            <AvatarImage :src="comment.author.avatar" />
-            <AvatarFallback>{{ comment.author.username.charAt(0).toUpperCase() }}</AvatarFallback>
-          </Avatar>
-          
-          <div class="flex-1">
-            <div class="flex items-center gap-2">
-              <span class="font-medium text-sm">{{ comment.author.username }}</span>
-              <span class="text-xs text-gray-500">
-                {{ formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true }) }}
-              </span>
-            </div>
-            <p class="text-sm mt-1">{{ comment.content }}</p>
-          </div>
-        </div>
-      </div>
     </div>
-  </Card>
+
+    <!-- Comment input -->
+    <div class="flex items-center space-x-2 p-4 border-t">
+      <Avatar class="h-9 w-9">
+        <AvatarFallback>Y</AvatarFallback>
+      </Avatar>
+      <div class="flex-1 relative">
+        <input 
+          placeholder="Write a comment..."
+          class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+        />
+      </div>
+      <Button variant="ghost" size="icon" class="h-8 w-8">
+        <Send class="h-4 w-4" />
+      </Button>
+    </div>
+  </div>
 </template>

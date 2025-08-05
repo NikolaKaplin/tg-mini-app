@@ -44,18 +44,11 @@ const post = ref({
 </script>
 
 <template>
-  <div class="container mx-auto max-w-3xl py-4 px-4">
-    <button 
-      class="rounded-lg bg-white p-2 w-10 h-10 mb-4 flex justify-center items-center shadow-sm hover:bg-gray-50 transition-colors" 
-      @click="router.back()"
-    >
-      <ArrowIcon class="w-5 h-5" />
-    </button>
-    
+
     <PostCard
       type="one"
       :key="post.id"
       :post="post"
     />
-  </div>
+
 </template>
