@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from "@/stores/authStore";
 
 export async function authedFetch(url: string, init?: RequestInit) {
     const authStore = useAuthStore();

@@ -6,8 +6,9 @@ import {
     initData,
     $debug,
     init as initSDK,
+    settingsButton,
 } from '@telegram-apps/sdk-vue';
-
+import WebApp from '@twa-dev/sdk';
 /**
  * Initializes the application and configures its dependencies.
  */
@@ -34,6 +35,7 @@ export function init(debug: boolean): void {
 
     // Mount all components used in the project.
     backButton.mount();
+    settingsButton.mount()
     miniApp.mount();
     themeParams.mount();
     initData.restore();
@@ -42,8 +44,11 @@ export function init(debug: boolean): void {
         .catch(e => {
             console.error('Something went wrong mounting the viewport', e);
         })
-        .then(() => {
+        .then(async () => {
             viewport.bindCssVars();
+            viewport.expand()
+            if (viewport.isExpanded()) WebApp.requestFullscreen();
+            WebApp.disableVerticalSwipes()
         });
 
     // Define components-related CSS variables.

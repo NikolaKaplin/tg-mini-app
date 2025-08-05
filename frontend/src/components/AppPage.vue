@@ -1,23 +1,24 @@
 <script setup lang="ts">
-defineProps<{ title: string, disclaimer?: string }>()
-
+defineProps<{ title: string; disclaimer?: string }>();
 </script>
 
 <template>
-    <div class="page">
-        <h1>{{ title }}</h1>
-        <div v-if="disclaimer" class="page__disclaimer">{{ disclaimer }}</div>
-        <slot />
-    </div>
+  <div class="page">
+    <header
+      class="fixed top-0 left-0 right-0 h-[10vh] bg-gray-900 shadow z-50 flex justify-center"
+    >
+      <p class="pt-[5vh] text-xl">{{ title }}</p>
+    </header>
+    <slot />
+  </div>
 </template>
 
 <style>
 .page {
-    padding: 0 10px;
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .page__disclaimer {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 </style>

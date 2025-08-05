@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { z } from "zod";
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from "@/stores/authStore";
 
 const router = useRouter();
 const { register } = useAuthStore();

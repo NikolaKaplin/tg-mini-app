@@ -1,0 +1,1 @@
+export const latest_tg_version = 8.0

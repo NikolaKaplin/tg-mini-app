@@ -15,7 +15,7 @@ type AuthResponse = {
 const { initDataRaw } = retrieveLaunchParams();
 
 export const useAuthStore = defineStore('authStore', () => {
-    const isValidate = ref(false)
+    const isValidate = ref<boolean>(false)
     const token = ref<string | null>(null)
     const user = ref<User | null>(null)
 

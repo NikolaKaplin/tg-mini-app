@@ -12,6 +12,7 @@ import ProfilePage from '@/pages/ProfilePage.vue';
 import WalletPage from '@/pages/WalletPage.vue';
 import PostPage from '@/pages/post/PostPage.vue';
 import AddPostPage from '@/pages/post/AddPostPage.vue';
+import UpdatePage from '@/pages/UpdatePage.vue';
 
 
 export const routes: RouteRecordRaw[] = [
@@ -19,6 +20,11 @@ export const routes: RouteRecordRaw[] = [
     path: '/register',
     name: 'register',
     component: RegisterPage
+  },
+  {
+    path: '/update',
+    name: 'update',
+    component: () => import("@/pages/UpdatePage.vue")
   },
   {
     path: "/error",
@@ -30,6 +36,12 @@ export const routes: RouteRecordRaw[] = [
     name: 'baseLayout',
     component: BasicLayout,
     children: [
+      {
+        path: '',
+        name: 'index',
+        component: IndexPage
+      }
+      ,
       {
         path: '/init-data',
         name: 'init-data',

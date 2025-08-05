@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { z } from "zod";
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from "@/stores/authStore";
 
 const router = useRouter();
 const { register } = useAuthStore();
@@ -49,26 +49,25 @@ async function acceptAgreement() {
 </script>
 
 <template>
-  <main
-    class="flex min-h-screen w-full items-center justify-center p-4"
-  >
-
-  <div class="absolute top-45 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full bg-[#38367F] shadow-lg">
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="32" 
-          height="32" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="white" 
-          stroke-width="2" 
-          stroke-linecap="round" 
-          stroke-linejoin="round"
-        >
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </div>
+  <main class="flex min-h-screen w-full items-center justify-center p-4">
+    <div
+      class="absolute top-45 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full bg-[#38367F] shadow-lg"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </div>
     <div class="w-full max-w-md space-y-6">
       <!-- Шаг 1: Ввод никнейма -->
       <div v-if="currentStep === 'nickname'" class="space-y-6">
@@ -176,11 +175,13 @@ async function acceptAgreement() {
           <div class="flex gap-3">
             <Button
               variant="outline"
-              class="flex-1 border-none bg-[#38367F] "
-              @click="() => {
-                currentStep = 'nickname'
-                if (isAgreed) isAgreed = !isAgreed
-              }"
+              class="flex-1 border-none bg-[#38367F]"
+              @click="
+                () => {
+                  currentStep = 'nickname';
+                  if (isAgreed) isAgreed = !isAgreed;
+                }
+              "
             >
               Назад
             </Button>
